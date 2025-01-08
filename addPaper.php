@@ -1,47 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-        <meta http-equiv="Pragma" content="no-cache" />
-        <meta http-equiv="Expires" content="0" />
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900|Ubuntu:400,500,700" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="style.css">
-    </head>
+
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700,900|Ubuntu:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
 
 
-    <body>
-        <!--header Start-->
-        <nav class="sticky">
-            <a href="index.html" class="logo"></a>
-            <ul class="navLinks" id="navLinks">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="generateSubjects.html">generate</a></li>
-              <li><a href="pastPaperSubjects.html">past papers</a></li>
-              <li><a href="chapterSubjects.html">syllabus</a></li>
-              <li><a href="addPaper.html">add paper</a></li>
-            </ul>
-            <div id="hamburger"></div>
-          </nav>
-          <!--header End-->
+<body>
+    <!--header Start-->
+    <nav class="sticky">
+        <a href="faculty_dashboard.php" class="logo"></a>
+        <ul class="navLinks" id="navLinks">
+            <li><a href="faculty_dashboard.php">Home</a></li>
+            <li><a href="addPaper.php">add paper</a></li>
+            <li><a href="logout.php">Logout</a></li>
+
+        </ul>
+        <div id="hamburger"></div>
+    </nav>
+    <!--header End-->
+    <div class="myContainer">
+        <!-- code start -->
+
         <div class="myContainer">
-            <!-- code start -->
-            
-        <div class="myContainer">
-      
+
             <!-------------- Write Code Here: -------------->
-      
+
             <div id="bannerContainer">
-              <img src="img/bannerIMG2.png">
-              <p>Add Question Paper</p>
+                <img src="img/bannerIMG2.png">
+                <p>Add Question Paper</p>
             </div>
-      
-            <div class="row" id="myRow" >
+
+            <div class="row" id="myRow">
                 <div class="col-md-6 mx-auto">
                     <p id="pageTitle">Paper Information</p>
-                            
+
                     <form class="myForm" action="addPaper.php" method="POST">
                         <div class="form-group">
                             <div class="row">
@@ -95,38 +96,21 @@
 
                         <div class="form-group">
                             <label>[N.B. — ]</label>
-                            <textarea type="text" class="form-control" name="note"
-                            rows="4"></textarea>
+                            <textarea type="text" class="form-control" name="note" rows="4"></textarea>
                         </div>
 
                         <div id="buttonContainer">
-                            <input type="hidden" name="form_submitted" value="1"/>
+                            <input type="hidden" name="form_submitted" value="1" />
                             <input class="myButton" name="submit" type="submit" value="Next">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-            <!-- code End -->
+        <!-- code End -->
 
-            <footer class="footer">
+        <?php include 'footer.php'; ?>
+</body>
 
-                <div class="detailsContainer">
-                  <img src="img/footerImg.png" id="footerLogo">
-                  <p>© 2024 Highly Effective Learning Platform (HELP)
-                    <br><br><b>CSE309 MID Project by:</b>
-                    <br>MD Shahriar Akram, <a href="mailto:2022839@iub.edu.bd">2022839@iub.edu.bd</a>
-                    <br><br><b>Under Course Instructor:</b>
-                    <br>MD Abu Sayed, <a href="mailto:asayed@iub.edu.bd">asayed@iub.edu.bd</a>
-                    <br><br><b>Department of Computer Science and Engineering</b>
-                    <br>Independent University, Bangladesh
-                  </p>
-                  <div id="backToTopContainer">
-                    <a href="#">Back to top ↑</a>
-                  </div>
-              
-                </div>
-              </footer>
-        </body>
-    </html>
-    <script src="navbar.js"></script>
+</html>
+<script src="navbar.js"></script>
