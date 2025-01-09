@@ -57,7 +57,8 @@ function getSubjectPapers($subject) {
     <?php include 'student_header.php'; ?>
 
     <div class="myContainer">
-        <h1>Past Papers</h1>
+        <h1 id="getStarted">Past Papers</h1>
+
 
         <!-- Subject Selection with Paper Count -->
         <div class="row">

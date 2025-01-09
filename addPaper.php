@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-// Check if the user is logged in and is a faculty member
-if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'faculty') {
-    header("Location: index.php");
-    exit;
-}
+
 
 // Retrieve the user's name from the session
 $name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Faculty Member';
@@ -78,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <ul class="navLinks" id="navLinks">
             <li><a href="faculty_dashboard.php">Home</a></li>
             <li><a href="addPaper.php">Add Paper</a></li>
+            <li><a href="addSyllabus.php">Add Syllabus</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         <div id="hamburger"></div>
@@ -87,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="myContainer">
         <div id="bannerContainer">
             <img src="img/bannerIMG1.png">
-            <p>Welcome, <?php echo htmlspecialchars($name); ?></p>
+            <p>Welcome faculty, <?php echo htmlspecialchars($name); ?></p>
         </div>
 
         <div class="row" id="myRow">

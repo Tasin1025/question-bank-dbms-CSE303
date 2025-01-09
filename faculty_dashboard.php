@@ -34,6 +34,7 @@ $name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Faculty Member
         <ul class="navLinks" id="navLinks">
             <li><a href="faculty_dashboard.php">Home</a></li>
             <li><a href="addPaper.php">Add Paper</a></li>
+            <li><a href="addSyllabus.php">Add Syllabus</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
         <div id="hamburger"></div>
