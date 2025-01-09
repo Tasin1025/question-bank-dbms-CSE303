@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Check if the user is logged in and is a faculty member
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'faculty') {
+    header("Location: index.php");
+    exit;
+}
+
+// Retrieve the user's name from the session
+$name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Faculty Member';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +26,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
 
     <!--header Start-->
@@ -21,22 +33,17 @@
         <a href="faculty_dashboard.php" class="logo"></a>
         <ul class="navLinks" id="navLinks">
             <li><a href="faculty_dashboard.php">Home</a></li>
-            <li><a href="addPaper.php">add paper</a></li>
+            <li><a href="addPaper.php">Add Paper</a></li>
             <li><a href="logout.php">Logout</a></li>
-
         </ul>
         <div id="hamburger"></div>
     </nav>
-
     <!--header End-->
+
     <div class="myContainer">
-
-        <!-------------- Write Code Here: -------------->
-
         <div id="bannerContainer">
             <img src="img/bannerIMG1.png">
-
-            <p>Welcome Faculty</p>
+            <p>Welcome Faculty, <?php echo htmlspecialchars($name); ?></p> <!-- Display faculty name -->
         </div>
 
         <div class="row" id="myRow">
@@ -76,4 +83,5 @@
 </body>
 
 </html>
+
 <script src="navbar.js"></script>

@@ -1,3 +1,52 @@
+<?php
+include 'db_config.php';
+
+session_start(); // Start the session to store user info
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $role = $_POST['role'];
+
+    if ($role == "student") {
+        $sql = "SELECT * FROM students WHERE email = ?";
+    } elseif ($role == "faculty") {
+        $sql = "SELECT * FROM faculty WHERE email = ?";
+    } else {
+        echo "<script>alert('Invalid role selected!'); window.history.back();</script>";
+        exit;
+    }
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        if ($password === $user['password']) { // No password hashing
+            // Store user information in the session
+            $_SESSION['user_name'] = $user['name']; // Store the student's name
+            $_SESSION['user_role'] = $role; // Store the role (student or faculty)
+            
+            // Redirect to appropriate dashboard
+            if ($role === "student") {
+                echo "<script>alert('Login successful! Redirecting to Student Dashboard.'); window.location.href='student_dashboard.php';</script>";
+            } elseif ($role === "faculty") {
+                echo "<script>alert('Login successful! Redirecting to Faculty Dashboard.'); window.location.href='faculty_dashboard.php';</script>";
+            }
+        } else {
+            echo "<script>alert('Invalid password!'); window.history.back();</script>";
+        }
+    } else {
+        echo "<script>alert('User not found!'); window.history.back();</script>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +75,6 @@
             <div class="col-md-6 mx-auto">
                 <p id="pageTitle">Login</p>
                 <form class="myForm" action="login.php" method="POST">
-
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" class="form-control" required>
@@ -35,7 +83,6 @@
                         <label for="password">Password:</label>
                         <input type="password" id="password" name="password" class="form-control" required>
                     </div>
-
                     <div class="form-group">
                         <label for="role">Login as:</label>
                         <select id="role" name="role" class="form-control" required>
@@ -45,7 +92,7 @@
                         </select>
                     </div>
                     <div id="buttonContainer">
-                        <button class="myButton" type="submit">Login</button>
+                        <button class="myButton btn btn-primary" type="submit">Login</button>
                     </div>
                 </form>
             </div>

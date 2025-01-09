@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Check if the user is logged in and is a student
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'student') {
+    header("Location: index.php");
+    exit;
+}
+
+// Retrieve the user's name from the session
+$name = isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Student';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,19 +26,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
     <!--header Start-->
     <?php include 'student_header.php'; ?>
     <!--header End-->
     <div class="myContainer">
 
-        <!-------------- Write Code Here: -------------->
-
         <div id="bannerContainer">
             <img src="img/bannerIMG1.png">
-
-            <p>Welcome Student</p>
+            <p>Welcome Student, <?php echo htmlspecialchars($name); ?></p>
         </div>
 
         <div class="row" id="myRow">
@@ -62,7 +71,6 @@
     </div>
 
     <footer class="footer">
-
         <div class="detailsContainer">
             <img src="img/footerImg.png" id="footerLogo">
             <p>© 2024 IUB Student HELP Portal
@@ -76,10 +84,10 @@
             <div id="backToTopContainer">
                 <a href="#">Back to top ↑</a>
             </div>
-
         </div>
     </footer>
 </body>
 
 </html>
+
 <script src="navbar.js"></script>

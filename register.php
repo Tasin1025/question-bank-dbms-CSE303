@@ -1,3 +1,42 @@
+<?php
+include 'db_config.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $role = $_POST['role'];
+
+    if ($password !== $confirmPassword) {
+        echo "<script>alert('Passwords do not match!'); window.history.back();</script>";
+        exit;
+    }
+
+    // SQL query based on role
+    if ($role == "student") {
+        $sql = "INSERT INTO students (name, email, password, role) VALUES (?, ?, ?, ?)";
+    } elseif ($role == "faculty") {
+        $sql = "INSERT INTO faculty (name, email, password, role) VALUES (?, ?, ?, ?)";
+    } else {
+        echo "<script>alert('Invalid role selected!'); window.history.back();</script>";
+        exit;
+    }
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $name, $email, $password, $role);
+
+    if ($stmt->execute()) {
+        echo "<script>alert('Registration successful! Redirecting to login page.'); window.location.href='login.php';</script>";
+    } else {
+        echo "<script>alert('Error: " . $stmt->error . "'); window.history.back();</script>";
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
